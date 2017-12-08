@@ -12,7 +12,7 @@ class MainMenu : public Scene
 public:	
 	void Initialize();
 	void Update(float delta);
-	void TouchBegan();
+	void TouchBegan(int z) override;
 
 	float delta;
 	float elapsedTime;

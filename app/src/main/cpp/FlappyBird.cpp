@@ -7,6 +7,7 @@
 #include "Core/Game.h"
 
 #include "FlappyBirdGame/MainMenu.h"
+#include "FlappyBirdGame/Level.h"
 
 static Game *game = 0;
 static bool init = false;
@@ -26,7 +27,7 @@ JNIEXPORT void JNICALL Java_com_amu_flappybird_NativeRenderer_nativeOnSurfaceCre
 		game->Initialize(width, height);
 
 		// set current scene to main menu
-		game->ChangeScene(new MainMenu());
+		game->ChangeScene(new FlappyLevel());
 	}
 }
 
@@ -41,9 +42,9 @@ JNIEXPORT void JNICALL Java_com_amu_flappybird_NativeRenderer_nativeOnRender(JNI
 }
 
 JNIEXPORT void JNICALL Java_com_amu_flappybird_NativeRenderer_nativeOnTouch(JNIEnv *jenv, jobject obj, int x, int y, int touchDown){
-	if (touchDown == 1){
+	if (touchDown >= 0){
 		// touch down
-		game->TouchBegan(x, RenderingEngine::GetInstance()->SCREEN_HEIGHT - y);
+		game->TouchBegan(x, RenderingEngine::GetInstance()->SCREEN_HEIGHT - y, touchDown);
 	}
 	else {
 		// touch end

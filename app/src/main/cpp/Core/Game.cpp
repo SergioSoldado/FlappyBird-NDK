@@ -57,11 +57,11 @@ void Game::Resume(){
 	}
 }
 
-void Game::TouchBegan(int x, int y){
+void Game::TouchBegan(int x, int y, int z){
 	Input::GetInstance()->SetTouchStatus(1, x, y);
 
 	if (scene != 0){
-		scene->TouchBegan();
+		scene->TouchBegan(z);
 	}
 }
 

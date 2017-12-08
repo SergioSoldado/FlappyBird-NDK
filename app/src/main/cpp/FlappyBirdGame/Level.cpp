@@ -3,15 +3,17 @@
 #include "../Core/Game.h"
 #include "MainMenu.h"
 
+#define kTAG "Level"
+
 void FlappyLevel::Initialize(){
 	delta = 0;
 	elapsedTime = 0;
 	score = 0;
-	pauseGame = true;
+	pauseGame = false;
 	gameOver = false;
 
-	screenWidth = 480;
-	screenHeight = 800;
+	screenWidth = 1024;
+	screenHeight = 768;
 
 	// initialize scene's main camera
 	mainCamera = new Camera(screenWidth, screenHeight, 0, 100, "MainCamera");
@@ -241,24 +243,25 @@ void FlappyLevel::ShowScoreCard(){
 //	AudioManager::GetInstance()->PlaySFX(swooshAudio);
 }
 
-void FlappyLevel::TouchBegan(){
+void FlappyLevel::TouchBegan(int z){
+
 	// start game
 	if (pauseGame){
 		pauseGame = false;
 	}
 
 	// listen for continue button, if game is over
-	if (gameOver){
-		if (continueButton->GetCollider()->InBounds(Input::GetInstance()->GetTouchPosition())){
-			// set screen to main menu
-			Game::GetInstance()->ChangeScene(new MainMenu());
-			return;
-		}
-	}
+//	if (gameOver){
+//		if (continueButton->GetCollider()->InBounds(Input::GetInstance()->GetTouchPosition())){
+////			// set screen to main menu
+////			Game::GetInstance()->ChangeScene(new MainMenu());
+////			return;
+//		}
+//	}
 
 	// flap the bird
 	if (bird->IsAlive()){
-		bird->ApplyImpulse();
+		bird->ApplyImpulse(z);
 		feathersParticleSystem->SetPosition(bird->GetPosition());
 		feathersParticleSystem->Emit(3);
 //		AudioManager::GetInstance()->PlaySFX(flapAudio);

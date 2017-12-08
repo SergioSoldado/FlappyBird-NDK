@@ -15,14 +15,14 @@ Bird::Bird(Texture* texture, char *name) : Sprite(texture, name){
 
 	// add collider
 	AddCollider(GetWidth() / 1.5, GetHeight() / 1.5);
-	GetCollider()->affectedByGravity = true;
+	GetCollider()->affectedByGravity = false;
 }
 
 void Bird::Update(){
 	// do not update if dead
-	if (!isAlive){
-		return;
-	}
+//	if (!isAlive){
+//		return;
+//	}
 
 	// delta time
 	float deltaTime = GameTime::GetInstance()->GetDeltaTime();
@@ -37,17 +37,18 @@ void Bird::Update(){
 void Bird::OnCollision(Collider *collider){
 	// kill if the collider belongs to ground or pipe game object
 	if (!strcmp(collider->transform->name, "ground") || !strcmp(collider->transform->name, "pipe")){
-		Kill();
+//		Kill();
 	}
 }
 
-void Bird::ApplyImpulse(){
-	if (!isAlive){
-		return;
-	}
-
+void Bird::ApplyImpulse(int z){
+//	if (!isAlive){
+//		return;
+//	}
+  printf("z:%d\n", z);
 	// boost up velocity in y direction
-	GetCollider()->velocity.y = impulsePower;
+	GetCollider()->position.y = 500 * z / 10000.0f;
+//	GetCollider()->velocity.y = impulsePower;
 	// rotate bird upwards (to seem like it is trying to go up)
 	SetRotation(impulseRotation);
 }

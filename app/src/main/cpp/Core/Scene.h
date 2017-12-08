@@ -26,7 +26,7 @@ public:
 	virtual void Pause(){}
 	virtual void Resume(){}
 
-	virtual void TouchBegan(){}
+	virtual void TouchBegan(int z){}
 	virtual void TouchMove(){}
 	virtual void TouchEnd(){}
 

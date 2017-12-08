@@ -2,7 +2,9 @@ package com.amu.flappybird;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -48,10 +50,27 @@ public class GameActivity extends Activity implements OnTouchListener {
     setContentView(glSurface);
   }
 
-  public boolean onTouch(View view, MotionEvent event) {
-    // call native on touch function
-    renderer.onTouch((int) event.getX(), (int) event.getY(),
-        event.getAction() == MotionEvent.ACTION_DOWN ? 1 : 0);
+  @Override
+  public boolean onTouch(View v, MotionEvent event) {
+    final int action = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
+        ? event.getActionMasked()
+        : event.getAction();
+    int N = event.getHistorySize();
+    int P = event.getPointerCount();
+    long time = event.getEventTime();
+
+    if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
+      Log.i("", "Updating pressure with -1");
+      renderer.onTouch((int) event.getX(), (int) event.getY(), -1);
+    } else if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_MOVE) {
+      int j = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
+          ? event.getActionIndex()
+          : 0;
+      float p = event.getPressure(j);
+      Log.i("", "Updating pressure with " + p);
+      renderer.onTouch((int) event.getX(), (int) event.getY(), (int)(10000 * p));
+
+    }
     return true;
   }
 

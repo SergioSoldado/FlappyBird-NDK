@@ -16,7 +16,7 @@ public:
 	~Bird();
 
 	void Update();
-	void ApplyImpulse();
+	void ApplyImpulse(int z);
 	void OnCollision(Collider *collider);
 
 	bool IsAlive();

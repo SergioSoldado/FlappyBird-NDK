@@ -19,7 +19,7 @@ private:
 public:	
 	void Initialize();
 	void Update(float delta);
-	void TouchBegan();
+	void TouchBegan(int z);
 
 	void Pause();
 	void Resume();

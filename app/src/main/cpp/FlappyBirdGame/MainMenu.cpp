@@ -72,7 +72,7 @@ void MainMenu::Update(float d){
 	logo->Translate(0, 2 * sinf(2 * elapsedTime));
 }
 
-void MainMenu::TouchBegan(){
+void MainMenu::TouchBegan(int z){
 	// start level of button is touched
 	if (playButton->GetCollider()->InBounds(Input::GetInstance()->GetTouchPosition())){
 		Game::GetInstance()->ChangeScene(new FlappyLevel());

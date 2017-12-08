@@ -8,6 +8,12 @@
 #include "MeshManager.h"
 #include "Scene.h"
 
+#include <jni.h>
+#include <android/log.h>
+
+#define LOGI(...) \
+  ((void)__android_log_print(ANDROID_LOG_INFO, kTAG, __VA_ARGS__))
+
 class Game
 {
 private:
@@ -36,7 +42,7 @@ public:
 	void Dispose();
 
 	// when screen is touched
-	void TouchBegan(int x, int y);
+	void TouchBegan(int x, int y, int z);
 
 	// touch move
 	void TouchMove(int x, int y);
