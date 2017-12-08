@@ -1,0 +1,3 @@
+/backup/downloads/flappyserj/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/edit_cache.dir
+/backup/downloads/flappyserj/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/rebuild_cache.dir
+/backup/downloads/flappyserj/app/.externalNativeBuild/cmake/release/x86/CMakeFiles/FlappyBird.dir

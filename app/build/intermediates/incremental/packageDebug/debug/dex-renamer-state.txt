@@ -1,0 +1,4 @@
+#Fri Dec 08 09:52:57 GMT 2017
+base.0=/backup/downloads/FlappyBird-NDK/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
